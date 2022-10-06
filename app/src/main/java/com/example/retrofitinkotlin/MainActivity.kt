@@ -11,10 +11,9 @@ import com.example.retrofitinkotlin.databinding.ActivityMainBinding
 import retrofit2.HttpException
 import java.io.IOException
 
-const val TAG = "MainActivity"
 
 class MainActivity : AppCompatActivity() {
-
+    private val TAG = "MainActivity"
     private lateinit var binding: ActivityMainBinding
     private lateinit var todoAdapter: TodoAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,7 +28,7 @@ class MainActivity : AppCompatActivity() {
             val response = try {
                 RetrofitInstance.api.getTodos()
             } catch (e: IOException) {
-                Log.e(TAG, "IOException, You might not have internet connection!")
+                Log.e(TAG, "IOException, You might not have internet connection! ${e.message}")
                 binding.progressBar.isVisible = false
                 return@launchWhenCreated
             } catch (e: HttpException) {
